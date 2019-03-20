@@ -37,11 +37,11 @@ HEADER (see above)
 
 namespace <namespacename>
 {
-  imports grouped and each group separated by a new line
+	imports grouped and each group separated by a new line
 
-  public class <classname>
-  {
-  }
+	public class <classname>
+	{
+	}
 }
 ```
 
@@ -64,29 +64,29 @@ For example:
 
 namespace Castle.ActiveRecord
 {
-    using System;
-    using System.Collections;
+	using System;
+	using System.Collections;
 
-    using Castle.ActiveRecord.Framework;
-    using Castle.ActiveRecord.Queries;
+	using Castle.ActiveRecord.Framework;
+	using Castle.ActiveRecord.Queries;
 
-    using NHibernate;
-    using NHibernate.Expression;
+	using NHibernate;
+	using NHibernate.Expression;
 
-    /// <summary>
-    /// Allow custom executions using the NHibernate's ISession.
-    /// </summary>
-    public delegate object NHibernateDelegate(ISession session, object instance);
+	/// <summary>
+	/// Allow custom executions using the NHibernate's ISession.
+	/// </summary>
+	public delegate object NHibernateDelegate(ISession session, object instance);
 
-    /// <summary>
-    /// Base class for all ActiveRecord classes. Implements
-    /// all the functionality to simplify the code on the
-    /// subclasses.
-    /// </summary>
-    [Serializable]
-    public abstract class ActiveRecordBase : ActiveRecordHooksBase
-    {
-        protected internal static ISessionFactoryHolder holder;
+	/// <summary>
+	/// Base class for all ActiveRecord classes. Implements
+	/// all the functionality to simplify the code on the
+	/// subclasses.
+	/// </summary>
+	[Serializable]
+	public abstract class ActiveRecordBase : ActiveRecordHooksBase
+	{
+		protected internal static ISessionFactoryHolder holder;
 
 ...
 ```
@@ -108,47 +108,46 @@ Nested classes should be on the end or within a region that explains/groups the 
 [Serializable]
 public class SomeClass : BaseClass, IInterface
 {
-    private static readonly int SomeReadonlyFieldConstant = 1;
+	private static readonly int SomeReadonlyFieldConstant = 1;
 
-    private String something;
-    private String else;
+	private String something;
+	private String else;
 
-    public SomeClass()
-    {
-    }
+	public SomeClass()
+	{
+	}
 
-    protected SomeClass(int someArgument) : this()
-    {
-    }
+	protected SomeClass(int someArgument) : this()
+	{
+	}
 
-    public void SomeMember()
-    {
-        ...
-    }
+	public void SomeMember()
+	{
+		...
+	}
 
-    #region IInterface Members
+	#region IInterface Members
 
-    public void DoSomething()
-    {
-        ...
-    }
+	public void DoSomething()
+	{
+		...
+	}
 
-    #endregion
+	#endregion
 
-    protected void SomeProtectedMethod()
-    {
-        ...
-    }
+	protected void SomeProtectedMethod()
+	{
+		...
+	}
 
-    protected String PropertyX
-    {
-        ...
-    }
+	protected String PropertyX
+	{
+		...
+	}
 
-    private void SomePrivateMethod()
-    {
-    }
-
+	private void SomePrivateMethod()
+	{
+	}
 }
 ```
 
@@ -159,9 +158,9 @@ Braces on new line:
 ```csharp
 public void MyMethod()
 {
-  if (something)
-  {
-  }
+	if (something)
+	{
+	}
 }
 ```
 
@@ -172,13 +171,13 @@ Example:
 ```csharp
 private void PopulateConfigNodes(XmlNode section)
 {
-    foreach(XmlNode node in section.ChildNodes)
-    {
-        if (node.NodeType != XmlNodeType.Element) continue;
+	foreach(XmlNode node in section.ChildNodes)
+	{
+		if (node.NodeType != XmlNodeType.Element) continue;
 
-        if (!Config_Node_Name.Equals(node.Name))
-        {
-            String message = String.Format("Unexpected node. Expect '{0}' found '{1}'", Config_Node_Name, node.Name);
+		if (!Config_Node_Name.Equals(node.Name))
+		{
+			String message = String.Format("Unexpected node. Expect '{0}' found '{1}'", Config_Node_Name, node.Name);
 ...
 ```
 
@@ -189,8 +188,8 @@ Prefer the short form for simple properties:
 ```csharp
 public String Name
 {
-  get { return name; }
-  set { value = value; }
+	get { return name; }
+	set { value = value; }
 }
 ```
 
@@ -199,15 +198,15 @@ However, if the property is more complex than that, use the standard form:
 ```csharp
 public string Name
 {
-  get
-  {
-   if (something)
-   {
-     return name;
-   }
-   return null;
-  }
-  set { value = value; }
+	get
+	{
+		if (something)
+		{
+			return name;
+		}
+		return null;
+	}
+	set { value = value; }
 }
 ```
 
@@ -241,21 +240,21 @@ Avoid it like hell. Code like the following should not be on the code base:
 ```csharp
 public static Array BuildObjectArray(Type t, IEnumerable list, bool distinct)
 {
-    Set s = (distinct ? new ListSet() : null);
+	Set s = (distinct ? new ListSet() : null);
 
-    ICollection c = list as ICollection;
-    IList newList = c != null ? new ArrayList(c.Count) : new ArrayList();
-    foreach (object o in list)
-    {
-        object[] p = (o is object[] ? (object[]) o : new object[] {o});
-        object el = Activator.CreateInstance(t, p);
-        if (s == null || s.Add(el))
-            newList.Add(el);
-    }
+	ICollection c = list as ICollection;
+	IList newList = c != null ? new ArrayList(c.Count) : new ArrayList();
+	foreach (object o in list)
+	{
+		object[] p = (o is object[] ? (object[]) o : new object[] {o});
+		object el = Activator.CreateInstance(t, p);
+		if (s == null || s.Add(el))
+			newList.Add(el);
+	}
 
-    Array a = Array.CreateInstance(t, newList.Count);
-    newList.CopyTo(a, 0);
-    return a;
+	Array a = Array.CreateInstance(t, newList.Count);
+	newList.CopyTo(a, 0);
+	return a;
 }
 ```
 
@@ -264,24 +263,24 @@ Brevity is good, but at least a minimum of meaningful names is also desirable. T
 ```csharp
 public static Array BuildObjectArray(Type type, IEnumerable list, bool distinct)
 {
-    Set set = (distinct ? new ListSet() : null);
+	Set set = (distinct ? new ListSet() : null);
 
-    ICollection coll = list as ICollection;
-    IList newList = coll != null ? new ArrayList(coll.Count) : new ArrayList();
+	ICollection coll = list as ICollection;
+	IList newList = coll != null ? new ArrayList(coll.Count) : new ArrayList();
 
-    foreach (object item in list)
-    {
-        object[] p = (item is object[] ? (object[]) item : new object[] {item});
-        object el = Activator.CreateInstance(type, p);
+	foreach (object item in list)
+	{
+		object[] p = (item is object[] ? (object[]) item : new object[] {item});
+		object el = Activator.CreateInstance(type, p);
 
-        if (set == null || set.Add(el))
-        {
-            newList.Add(el);
-        }
-    }
+		if (set == null || set.Add(el))
+		{
+			newList.Add(el);
+		}
+	}
 
-    Array a = Array.CreateInstance(type, newList.Count);
-    newList.CopyTo(a, 0);
-    return a;
+	Array a = Array.CreateInstance(type, newList.Count);
+	newList.CopyTo(a, 0);
+	return a;
 }
 ```
